@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<h2>D'abord l'image avant le post</h2>
+{{ form_start(form) }}
+{{ form_row(form.imageFile, {
+    attr : {
+        'placeholder':"Prendre une photo",
+        'capture': 'user',
+        'accept':'image/*'
+    }
+}) }}
+    <button type="submit" class="btn btn-success">try out</button>
+{{ form_end(form) }}
+    {{ form_start(form2) }}
+    {{ form_row(form2.imageFile, {
+        attr : {
+            'placeholder':"choisir une photo"
+
+        }
+    }) }}
+    <button type="submit" class="btn btn-success">try out</button>
+    {{ form_end(form2) }}
+
+
+
+{% endblock %}

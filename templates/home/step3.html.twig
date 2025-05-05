@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+
+
+
+        <img width="150px" src="{{ vich_uploader_asset(post.image, 'imageFile') }}" alt="">
+
+        <p><strong>{{ post.content }}</strong></p>
+
+
+
+
+{% endblock %}
