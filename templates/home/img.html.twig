@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+    {% if app.user.images|length > 0 %}
+
+    {% for img in app.user.images %}
+
+        <img width="150px" src="{{ vich_uploader_asset(img, 'imageFile') }}" alt="">
+
+    {% endfor %}
+
+    {% endif %}
+{{ form_start(form) }}
+{{ form_row(form.imageFile, {
+    attr : {
+        'capture': 'user',
+        'accept':'image/*'
+    }
+}) }}
+    <button type="submit" class="btn btn-success">try out</button>
+{{ form_end(form) }}
+{% endblock %}
