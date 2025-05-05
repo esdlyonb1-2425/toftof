@@ -33,6 +33,8 @@ final class HomeController extends AbstractController
             return $this->redirectToRoute('app_img');
         }
 
+
+
         $image2 = new Image();
         $form2 = $this->createForm(ImageForm::class, $image2);
         $form2->handleRequest($request);
