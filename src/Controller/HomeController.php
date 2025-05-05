@@ -33,9 +33,20 @@ final class HomeController extends AbstractController
             return $this->redirectToRoute('app_img');
         }
 
+        $image2 = new Image();
+        $form2 = $this->createForm(ImageForm::class, $image2);
+        $form2->handleRequest($request);
+        if ($form2->isSubmitted() && $form2->isValid()) {
+            $image2->setOf($this->getUser());
+            $manager->persist($image2);
+            $manager->flush();
+            return $this->redirectToRoute('app_img');
+        }
+
 
         return $this->render('home/img.html.twig', [
             'form' => $form,
+            'form2' => $form2,
         ]);
     }
 }
