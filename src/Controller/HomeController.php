@@ -98,6 +98,7 @@ final class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $post->setImage($image);
+            $post->setAuthor($this->getUser()->getProfile());
             $manager->persist($post);
             $manager->flush();
             return $this->redirectToRoute('app_step3', ['id' => $post->getId()]);

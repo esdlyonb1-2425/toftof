@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Profile;
 use App\Entity\User;
 use App\Form\RegistrationForm;
 use App\Security\SecurityAuthenticator;
@@ -30,6 +31,10 @@ class RegistrationController extends AbstractController
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $entityManager->persist($user);
+            $entityManager->flush();
+            $profile = new Profile();
+            $profile->setOwner($user);
+            $entityManager->persist($profile);
             $entityManager->flush();
 
             // do anything else you need here, like send an email

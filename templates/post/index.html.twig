@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+
+    {% for post in posts %}
+
+        <div>
+            <img width="150px" src="{{ vich_uploader_asset(post.image, 'imageFile') }}" alt="">
+
+            <p><strong>{{ post.content }}</strong></p>
+        </div>
+
+    {% endfor %}
+{% endblock %}

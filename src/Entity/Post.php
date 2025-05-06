@@ -21,6 +21,10 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     private ?Image $image = null;
 
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Profile $author = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +50,18 @@ class Post
     public function setImage(Image $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Profile
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Profile $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }
