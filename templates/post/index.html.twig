@@ -10,6 +10,7 @@
             <img width="150px" src="{{ vich_uploader_asset(post.image, 'imageFile') }}" alt="">
 
             <p><strong>{{ post.content }}</strong></p>
+            <a href="{{ path('app_share_with', {id:post.id}) }}" class="btn btn-primary">Share</a>
         </div>
 
     {% endfor %}

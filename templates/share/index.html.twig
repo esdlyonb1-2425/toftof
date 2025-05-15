@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShareController!{% endblock %}
+
+{% block body %}
+
+    <h3>Share the post {{ post.id }}</h3>
+    <h2>With :</h2>
+    {% for friend in app.user.profile.getFriends() %}
+    
+        <p>{{ friend.owner.email }} <a href="{{ path('app_share',{id:post.id,recipientId:friend.id}) }}" class="btn btn-success">share</a></p>
+        
+    {% endfor %}
+{% endblock %}

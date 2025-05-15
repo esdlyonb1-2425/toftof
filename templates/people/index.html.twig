@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello PeopleController!{% endblock %}
+{% block javascripts %}
 
+    {{ parent() }}
+    {{ importmap('truc') }}
+
+{% endblock %}
 {% block body %}
 <h3>the people</h3>
 {% for profile in profiles %}
@@ -9,6 +14,7 @@
     {% if profile != app.user.profile %}
 
         <p><strong>{{ profile.owner.email }}   ---
+                <a href="#" class="btn btn-warning coucou">je suis le bouton de test</a>
 
                 {% if not app.user.profile.isFriendsWith(profile) and not app.user.profile.isPendingFriendRequest(profile) %}
 
@@ -35,6 +41,7 @@
         <p><strong>asked {{ receivedRequest.sender.owner.email }} on {{ receivedRequest.createdAt|date('H:m:I') }}
                 <a href="{{ path('app_accept_friend_request', {id:receivedRequest.id}) }}" class="btn btn-success">Accept</a>
                 <a href="{{ path('app_decline_friend_request', {id:receivedRequest.id}) }}" class="btn btn-danger">Decline</a>
+                <a href="#" class="btn btn-warning coucou">je suis le bouton de test</a>
             </strong></p>
 
     {% endfor %}

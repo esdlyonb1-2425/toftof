@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,6 +26,17 @@ class Post
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Profile $author = null;
+
+    /**
+     * @var Collection<int, Share>
+     */
+    #[ORM\OneToMany(targetEntity: Share::class, mappedBy: 'post')]
+    private Collection $shares;
+
+    public function __construct()
+    {
+        $this->shares = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -62,6 +75,36 @@ class Post
     public function setAuthor(?Profile $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Share>
+     */
+    public function getShares(): Collection
+    {
+        return $this->shares;
+    }
+
+    public function addShare(Share $share): static
+    {
+        if (!$this->shares->contains($share)) {
+            $this->shares->add($share);
+            $share->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShare(Share $share): static
+    {
+        if ($this->shares->removeElement($share)) {
+            // set the owning side to null (unless already changed)
+            if ($share->getPost() === $this) {
+                $share->setPost(null);
+            }
+        }
 
         return $this;
     }
